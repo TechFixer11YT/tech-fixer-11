@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tech Fixer 11 laptop repair service in Portugal, Spain and France.">
+  <title>Tech Fixer 11 | Laptop Repairs</title>
+  <style>
+    :root {
+      --bg: #07070b; --panel: #11111a; --panel2: #171722;
+      --cyan: #69f7ff; --pink: #ff2c9c; --muted: #b7b7c8;
+      --line: rgba(105,247,255,.18); --white: #f7f7ff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; color: var(--white); background:
+        radial-gradient(ellipse at 75% 12%, rgba(255,44,156,.12), transparent 34%),
+        radial-gradient(ellipse at 10% 40%, rgba(37,175,255,.09), transparent 34%), var(--bg);
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    header { position: sticky; top: 0; z-index: 5; background: rgba(7,7,11,.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+    .nav { min-height: 78px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:12px; min-width: 0; }
+    .brand img { width: 64px; height: 52px; object-fit: cover; object-position: center; border-radius: 9px; }
+    .brand strong { letter-spacing: 1.5px; font-size: 1rem; white-space: nowrap; }
+    .brand strong span { color: var(--cyan); }
+    nav { display:flex; align-items:center; gap:22px; color:var(--muted); font-size:.92rem; }
+    nav a:hover { color:var(--cyan); }
+    .lang { color:var(--muted); font-size:.8rem; white-space:nowrap; }
+    .hero { display:grid; grid-template-columns:1.08fr .92fr; gap:48px; align-items:center; padding:76px 0 64px; }
+    .eyebrow { color:var(--cyan); text-transform:uppercase; letter-spacing:3px; font-size:.78rem; font-weight:700; }
+    h1 { font-size:clamp(2.5rem, 6vw, 4.7rem); line-height:1.04; letter-spacing:-2px; margin:16px 0 20px; }
+    h1 span { color:var(--cyan); text-shadow:0 0 24px rgba(105,247,255,.28); }
+    .lead { color:var(--muted); max-width:570px; font-size:1.1rem; }
+    .actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:30px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:13px 20px; border-radius:9px; font-weight:750; border:1px solid var(--pink); background:linear-gradient(135deg, rgba(255,44,156,.2), rgba(105,247,255,.08)); box-shadow:0 0 22px rgba(255,44,156,.13); }
+    .btn:hover { box-shadow:0 0 28px rgba(255,44,156,.3); transform:translateY(-1px); }
+    .btn.secondary { border-color:var(--line); color:var(--cyan); background:transparent; box-shadow:none; }
+    .hero-art { border:1px solid rgba(255,44,156,.32); border-radius:22px; padding:16px; background:linear-gradient(145deg,rgba(255,44,156,.09),rgba(105,247,255,.04)); box-shadow:0 0 55px rgba(255,44,156,.10); }
+    .hero-art img { width:100%; display:block; border-radius:13px; }
+    section { padding:55px 0; }
+    .section-head { margin-bottom:25px; }
+    h2 { font-size:clamp(1.8rem,4vw,2.5rem); margin:0 0 8px; }
+    .sub { color:var(--muted); margin:0; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+    .card { padding:23px; border:1px solid var(--line); border-radius:15px; background:linear-gradient(150deg,var(--panel2),var(--panel)); }
+    .ico { font-size:1.8rem; }
+    h3 { margin:9px 0 7px; }
+    .card p { margin:0; color:var(--muted); font-size:.94rem; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+    .step { padding:18px; border-left:2px solid var(--pink); background:rgba(255,255,255,.035); border-radius:0 12px 12px 0; }
+    .step b { display:block; color:var(--cyan); margin-bottom:5px; }
+    .about { display:grid; grid-template-columns:.75fr 1.25fr; gap:25px; align-items:center; }
+    .profile { border:1px solid rgba(255,44,156,.35); border-radius:17px; padding:25px; text-align:center; background:var(--panel); }
+    .avatar { width:76px; height:76px; display:grid; place-items:center; margin:auto; border-radius:50%; border:1px solid var(--cyan); color:var(--cyan); font-size:2rem; box-shadow:0 0 20px rgba(105,247,255,.2); }
+    .profile small { color:var(--muted); }
+    .note { color:var(--muted); font-size:.88rem; border:1px solid var(--line); border-radius:12px; padding:15px; margin-top:18px; }
+    .request { background:linear-gradient(145deg,rgba(255,44,156,.08),rgba(105,247,255,.05)); border:1px solid var(--line); border-radius:18px; padding:26px; }
+    form { display:grid; grid-template-columns:1fr 1fr; gap:15px; }
+    label { display:block; font-size:.9rem; color:var(--muted); }
+    input, select, textarea { width:100%; margin-top:6px; padding:12px; color:var(--white); background:#090911; border:1px solid #343448; border-radius:8px; font:inherit; }
+    textarea { min-height:110px; resize:vertical; }
+    .full { grid-column:1/-1; }
+    .notice { font-size:.85rem; color:var(--muted); }
+    #demoMessage { display:none; margin-top:16px; padding:14px; border-radius:9px; border:1px solid var(--cyan); color:var(--cyan); }
+    footer { border-top:1px solid var(--line); padding:28px 0; color:var(--muted); font-size:.85rem; }
+    @media(max-width:800px) {
+      .nav { flex-wrap:wrap; padding:12px 0; } nav { order:3; width:100%; overflow:auto; padding-bottom:5px; } 
+      .hero,.about { grid-template-columns:1fr; } .hero { padding-top:48px; gap:30px; }
+      .cards { grid-template-columns:1fr; } .steps { grid-template-columns:1fr 1fr; }
+    }
+    @media(max-width:520px) { .wrap{width:min(100% - 28px,1120px)} form{grid-template-columns:1fr} .full{grid-column:auto} .steps{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="Tech Fixer 11 home">
+      <img src="tech-fixer-logo.png" alt="Tech Fixer 11 neon logo">
+      <strong>TECH FIXER <span>11</span></strong>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#repairs">Repairs</a><a href="#how">How it works</a><a href="#request">Request a repair</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="lang">EN&nbsp; | &nbsp;PT&nbsp; | &nbsp;ES&nbsp; | &nbsp;FR</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Portugal · Spain · France</div>
+        <h1>Laptop problems?<br><span>Let's fix them.</span></h1>
+        <p class="lead">Laptop diagnostics, hardware repairs and software troubleshooting. Start with a repair request and receive a quote before any paid repair begins.</p>
+        <div class="actions">
+          <a class="btn" href="#request">REQUEST A REPAIR ↗</a>
+          <a class="btn secondary" href="#how">HOW IT WORKS</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="tech-fixer-logo.png" alt="Tech Fixer 11 neon pink ring and cyan logo">
+      </div>
+    </section>
+
+    <section id="repairs">
+      <div class="section-head"><div class="eyebrow">What we work on</div><h2>Repair services</h2><p class="sub">Non-Apple laptops only. Each repair is assessed before a quote is offered.</p></div>
+      <div class="cards">
+        <article class="card"><div class="ico">🛠️</div><h3>Hardware repairs</h3><p>Help with common hardware faults, damaged components, cooling issues and upgrades where parts and skills are available.</p></article>
+        <article class="card"><div class="ico">💿</div><h3>Software support</h3><p>Operating-system troubleshooting, Linux support, driver problems, setup and software fault diagnosis.</p></article>
+        <article class="card"><div class="ico">🔍</div><h3>Diagnostics</h3><p>Identify the likely cause of a problem and explain the repair options before you decide what to do.</p></article>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="section-head"><div class="eyebrow">Simple and transparent</div><h2>How it works</h2><p class="sub">No repair starts until the customer has approved the quote.</p></div>
+      <div class="steps">
+        <div class="step"><b>01 · Request</b>Describe the laptop and the problem.</div>
+        <div class="step"><b>02 · Send</b>Agree on a tracked shipping method and send-in instructions.</div>
+        <div class="step"><b>03 · Approve</b>Receive the diagnosis and written quote.</div>
+        <div class="step"><b>04 · Return</b>After approval and repair, arrange payment and tracked return delivery.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="about">
+        <div class="profile">
+          <div class="avatar" aria-hidden="true">RM</div>
+          <h3>Rodrick Mart</h3>
+          <small>Laptop repair technician</small>
+        </div>
+        <div><div class="eyebrow">About Tech Fixer 11</div><h2>Clear communication. Careful work.</h2><p class="sub">Tech Fixer 11 is being built to make laptop repairs straightforward: explain the problem, understand the quote and stay informed about the repair.</p><p class="sub">No personal photograph is displayed.</p></div>
+      </div>
+    </section>
+
+    <section id="request">
+      <div class="section-head"><div class="eyebrow">Get started</div><h2>Request a repair</h2><p class="sub">Tell us a little about your laptop. This is a demonstration form and does not send information anywhere.</p></div>
+      <div class="request">
+        <form id="repairForm">
+          <label>Country
+            <select required><option value="">Choose country</option><option>Portugal</option><option>Spain</option><option>France</option></select>
+          </label>
+          <label>Laptop brand
+            <input required placeholder="e.g. HP, Dell, Lenovo, ASUS">
+          </label>
+          <label>Model (if known)
+            <input placeholder="e.g. Pavilion 15">
+          </label>
+          <label>Operating system
+            <select><option>Windows</option><option>Linux</option><option>ChromeOS</option><option>Other / Not sure</option></select>
+          </label>
+          <label class="full">What's wrong with the laptop?
+            <textarea required placeholder="Describe the problem and when it started..."></textarea>
+          </label>
+          <div class="full">
+            <button class="btn" type="submit">PREVIEW REQUEST</button>
+            <p class="notice">For this first demo, do not enter real contact details, passwords or private information. A secure request system will be added later.</p>
+            <div id="demoMessage" role="status">Demo only: your form layout works, but no request has been sent or saved.</div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="section-head"><div class="eyebrow">Contact</div><h2>Questions before sending?</h2><p class="sub">Contact details will be added once the business contact method is ready.</p></div>
+    </section>
+  </div>
+</main>
+<footer><div class="wrap">© <span id="year"></span> Tech Fixer 11 · Portugal, Spain & France · Website prototype</div></footer>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('repairForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.getElementById('demoMessage').style.display = 'block';
+  });
+</script>
+</body>
+</html>
