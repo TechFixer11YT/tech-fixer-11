@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,9 +36,7 @@
 
     a { color: inherit; text-decoration: none; }
 
-    a:focus-visible, button:focus-visible,
-    input:focus-visible, select:focus-visible,
-    textarea:focus-visible {
+    a:focus-visible {
       outline: 2px solid var(--cyan);
       outline-offset: 3px;
     }
@@ -171,12 +170,6 @@
       box-shadow: none;
     }
 
-    .btn:disabled {
-      opacity: .6;
-      cursor: wait;
-      transform: none;
-    }
-
     .hero-art {
       border: 1px solid rgba(255, 44, 156, .32);
       border-radius: 22px;
@@ -279,97 +272,11 @@
 
     .profile small { color: var(--muted); }
 
-    .request {
-      background: linear-gradient(145deg, rgba(255, 44, 156, .08), rgba(105, 247, 255, .05));
+    .contact-box {
+      padding: 28px;
       border: 1px solid var(--line);
       border-radius: 18px;
-      padding: 26px;
-    }
-
-    form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .field { min-width: 0; }
-
-    label {
-      display: block;
-      color: var(--muted);
-      font-size: .92rem;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      margin-top: 6px;
-      padding: 12px;
-      color: var(--white);
-      background: #090911;
-      border: 1px solid #343448;
-      border-radius: 8px;
-      font: inherit;
-    }
-
-    input, select { min-height: 48px; }
-    textarea { min-height: 125px; resize: vertical; }
-
-    input[type="checkbox"] {
-      width: auto;
-      min-height: 0;
-      margin: 0 8px 0 0;
-      accent-color: var(--pink);
-    }
-
-    .full { grid-column: 1 / -1; }
-
-    .notice {
-      color: var(--muted);
-      font-size: .86rem;
-      margin: 0;
-    }
-
-    .consent {
-      display: flex;
-      align-items: flex-start;
-      gap: 3px;
-    }
-
-    .consent input { margin-top: 5px; }
-
-    .courier-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .courier-card {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: linear-gradient(150deg, var(--panel-2), var(--panel));
-    }
-
-    .courier-card p {
-      color: var(--muted);
-      margin: 6px 0 14px;
-    }
-
-    .courier-card a {
-      color: var(--cyan);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .courier-card a:hover { color: var(--pink); }
-
-    .courier-note {
-      margin-top: 18px;
-      padding: 18px;
-      border: 1px solid rgba(255, 44, 156, .35);
-      border-radius: 12px;
-      background: rgba(255, 44, 156, .05);
-      color: var(--muted);
+      background: linear-gradient(145deg, rgba(255, 44, 156, .08), rgba(105, 247, 255, .05));
     }
 
     footer {
@@ -391,16 +298,14 @@
 
       .hero, .about { grid-template-columns: 1fr; }
       .hero { padding-top: 48px; gap: 30px; }
-      .cards, .courier-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 520px) {
       .wrap { width: min(100% - 28px, 1120px); }
-      form { grid-template-columns: 1fr; }
-      .full { grid-column: auto; }
       .steps { grid-template-columns: 1fr; }
-      .request { padding: 18px; }
+      .contact-box { padding: 18px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -423,8 +328,8 @@
       <a href="#home">Home</a>
       <a href="#repairs">Repairs</a>
       <a href="#how">How it works</a>
-      <a href="#request">Request a repair</a>
-      <a href="#delivery">Delivery options</a>
+      <a href="chat.html">Repair chat</a>
+      <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
 
@@ -438,15 +343,20 @@
     <section class="hero" id="home">
       <div>
         <div class="eyebrow">Portugal · Spain · France</div>
-        <h1>Laptop problems?<br><span>Let's fix them.</span></h1>
+
+        <h1>
+          Laptop problems?<br>
+          <span>Let's fix them.</span>
+        </h1>
+
         <p class="lead">
           Laptop diagnostics, hardware repairs and software troubleshooting.
-          Start with an enquiry and receive information about the next steps
-          before any paid repair begins.
+          Start by telling us what's wrong with your laptop.
+          We'll discuss the next steps before any repair begins.
         </p>
 
         <div class="actions">
-          <a class="btn" href="#request">SEND AN ENQUIRY ↗</a>
+          <a class="btn" href="chat.html">SEND AN ENQUIRY ↗</a>
           <a class="btn secondary" href="#how">HOW IT WORKS</a>
         </div>
       </div>
@@ -460,26 +370,37 @@
       <div class="section-head">
         <div class="eyebrow">What we work on</div>
         <h2>Repair services</h2>
-        <p class="sub">Non-Apple laptops only. Each enquiry is assessed before any repair is agreed.</p>
+        <p class="sub">
+          Non-Apple laptops only. Each enquiry is assessed before any repair is agreed.
+        </p>
       </div>
 
       <div class="cards">
         <article class="card">
           <div class="ico">🛠️</div>
           <h3>Hardware repairs</h3>
-          <p>Help with common hardware faults, damaged components, cooling issues and upgrades where parts and skills are available.</p>
+          <p>
+            Help with common hardware faults, damaged components,
+            cooling issues and upgrades where parts and skills are available.
+          </p>
         </article>
 
         <article class="card">
           <div class="ico">💿</div>
           <h3>Software support</h3>
-          <p>Operating-system troubleshooting, Linux support, driver problems, setup and software fault diagnosis.</p>
+          <p>
+            Operating-system troubleshooting, Linux support,
+            driver problems, setup and software fault diagnosis.
+          </p>
         </article>
 
         <article class="card">
           <div class="ico">🔍</div>
           <h3>Diagnostics</h3>
-          <p>Identify the likely cause of a problem and explain possible options before a customer decides what to do.</p>
+          <p>
+            Identify the likely cause of a problem and explain
+            possible options before a customer decides what to do.
+          </p>
         </article>
       </div>
     </section>
@@ -488,200 +409,31 @@
       <div class="section-head">
         <div class="eyebrow">Simple and transparent</div>
         <h2>How it works</h2>
-        <p class="sub">No paid repair should begin until the customer has reviewed and approved the quote.</p>
+        <p class="sub">
+          No paid repair should begin until the customer has reviewed and approved the quote.
+        </p>
       </div>
 
       <div class="steps">
-        <div class="step"><b>01 · Enquiry</b>Describe the laptop and the problem.</div>
-        <div class="step"><b>02 · Discussion</b>Discuss whether an in-person or other suitable assessment is possible.</div>
-        <div class="step"><b>03 · Quote</b>Receive an explanation of the issue and any proposed costs.</div>
-        <div class="step"><b>04 · Decision</b>Decide whether to proceed. No repair is agreed by submitting this form.</div>
-      </div>
-    </section>
+        <div class="step">
+          <b>01 · Chat</b>
+          Tell us what's wrong with your laptop.
+        </div>
 
-    <section id="request">
-      <div class="section-head">
-        <div class="eyebrow">Repair enquiries</div>
-        <h2>Request a laptop repair</h2>
-        <p class="sub">Complete the form below to send an enquiry.</p>
-      </div>
+        <div class="step">
+          <b>02 · Review</b>
+          The fixer reviews your enquiry and discusses the problem with you.
+        </div>
 
-      <div class="request">
-        <form id="repairForm" action="https://formspree.io/f/mgakvapb" method="POST">
+        <div class="step">
+          <b>03 · Acceptance</b>
+          If the repair can be accepted, the next arrangements are discussed.
+        </div>
 
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
-                 aria-hidden="true" style="position:absolute;left:-5000px">
-
-          <div class="field">
-            <label for="customer-name">Your name</label>
-            <input id="customer-name" name="name" type="text"
-                   autocomplete="name" maxlength="80" required>
-          </div>
-
-          <div class="field">
-            <label for="customer-email">Your email</label>
-            <input id="customer-email" name="email" type="email"
-                   autocomplete="email" maxlength="254" required>
-          </div>
-
-          <div class="field">
-            <label for="country">Country</label>
-            <select id="country" name="country" required>
-              <option value="">Choose a country</option>
-              <option value="Portugal">Portugal</option>
-              <option value="Spain">Spain</option>
-              <option value="France">France</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="brand">Laptop brand</label>
-            <input id="brand" name="laptop_brand" type="text"
-                   placeholder="e.g. HP, Dell, Lenovo, ASUS"
-                   maxlength="80" required>
-          </div>
-
-          <div class="field">
-            <label for="model">Laptop model (if known)</label>
-            <input id="model" name="laptop_model" type="text"
-                   placeholder="e.g. Pavilion 15" maxlength="100">
-          </div>
-
-          <div class="field">
-            <label for="operating-system">Operating system</label>
-            <select id="operating-system" name="operating_system">
-              <option value="">Choose if known</option>
-              <option value="Windows">Windows</option>
-              <option value="Linux">Linux</option>
-              <option value="ChromeOS">ChromeOS</option>
-              <option value="Other / Not sure">Other / Not sure</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label for="problem">What's wrong with the laptop?</label>
-            <textarea id="problem" name="problem" maxlength="3000"
-              placeholder="Describe the problem and when it started. Please do not include private information."
-              required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="courier-preference">Preferred delivery company (optional)</label>
-            <select id="courier-preference" name="courier_preference">
-              <option value="">Not sure yet</option>
-              <option value="InPost">InPost</option>
-              <option value="DPD">DPD</option>
-              <option value="CTT">CTT</option>
-              <option value="GLS">GLS</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="preferred-point">Preferred drop-off point (optional)</label>
-            <input id="preferred-point" name="preferred_dropoff_point"
-                   type="text" maxlength="160"
-                   placeholder="Name of a point, if you have one">
-          </div>
-
-          <div class="field full">
-            <p class="notice">
-              These are preferences only. Do not send the laptop or pay for
-              postage until the repair arrangements and destination have
-              been confirmed.
-            </p>
-          </div>
-
-          <div class="field full">
-            <label class="consent" for="consent">
-              <input id="consent" name="contact_consent"
-                     type="checkbox" value="Agreed" required>
-              <span>I agree to be contacted about this enquiry.</span>
-            </label>
-          </div>
-
-          <div class="field full">
-            <p class="notice">
-              Do not enter passwords, PINs, payment details, home addresses
-              or other sensitive information. Sending this form is only an
-              enquiry; it does not book a repair or require you to send a device.
-            </p>
-          </div>
-
-          <div class="field full">
-            <button class="btn" id="submitEnquiry" type="submit">
-              SEND ENQUIRY ↗
-            </button>
-            <p class="notice" id="formFeedback" role="status"
-               aria-live="polite" style="margin-top:10px"></p>
-          </div>
-
-        </form>
-      </div>
-    </section>
-
-    <section id="delivery">
-      <div class="section-head">
-        <div class="eyebrow">Delivery options</div>
-        <h2>Find a nearby drop-off point</h2>
-        <p class="sub">
-          Choose a courier below to open its official location finder
-          and explore nearby shops or lockers.
-        </p>
-      </div>
-
-      <div class="courier-grid">
-
-        <article class="courier-card">
-          <div class="ico">📦</div>
-          <h3>InPost</h3>
-          <p>Find a Ponto Pack or Locker and check its address and opening information.</p>
-          <a href="https://www.inpost.pt/encontrar-um-ponto-pack-proximo-de-minha-casa"
-             target="_blank" rel="noopener noreferrer">
-            Open InPost location map ↗
-          </a>
-        </article>
-
-        <article class="courier-card">
-          <div class="ico">🚚</div>
-          <h3>DPD Pickup</h3>
-          <p>Search for a nearby Pickup parcel shop or locker.</p>
-          <a href="https://www.dpd.com/pt/pt/pickup-parcelshops/parcelshop-finder/"
-             target="_blank" rel="noopener noreferrer">
-            Open DPD location finder ↗
-          </a>
-        </article>
-
-        <article class="courier-card">
-          <div class="ico">📮</div>
-          <h3>CTT Collectt</h3>
-          <p>Explore CTT shops, collection points, Payshop agents and Locky lockers.</p>
-          <a href="https://www.ctt.pt/particulares/receber/locais-de-entrega-alternativos/collectt"
-             target="_blank" rel="noopener noreferrer">
-            Open CTT Collectt locations ↗
-          </a>
-        </article>
-
-        <article class="courier-card">
-          <div class="ico">🚛</div>
-          <h3>GLS</h3>
-          <p>Search for GLS Parcel Shops and other nearby parcel points.</p>
-          <a href="https://gls-group.com/PT/en/parcel-shop/search-parcel-shop/"
-             target="_blank" rel="noopener noreferrer">
-            Open GLS location finder ↗
-          </a>
-        </article>
-
-      </div>
-
-      <div class="courier-note">
-        <strong>Postage prices are not connected yet.</strong>
-        <p class="notice">
-          The final price depends on the parcel's size, weight, route and
-          the courier's service. Tech Fixer 11 will confirm the shipping
-          cost before anything is sent. These links open the couriers'
-          own location finders; choosing a point here does not book a shipment.
-        </p>
+        <div class="step">
+          <b>04 · Shipping and repair</b>
+          Agree on delivery arrangements and the repair quote before proceeding.
+        </div>
       </div>
     </section>
 
@@ -696,12 +448,16 @@
         <div>
           <div class="eyebrow">About Tech Fixer 11</div>
           <h2>Clear communication. Careful work.</h2>
+
           <p class="sub">
             Tech Fixer 11 is being developed to make laptop troubleshooting
             straightforward: explain the problem, understand the options
             and stay informed about the next steps.
           </p>
-          <p class="sub">No personal photograph is displayed.</p>
+
+          <p class="sub">
+            No personal photograph is displayed.
+          </p>
         </div>
       </div>
     </section>
@@ -709,11 +465,22 @@
     <section id="contact">
       <div class="section-head">
         <div class="eyebrow">Contact</div>
-        <h2>Questions before sending?</h2>
+        <h2>Need help with your laptop?</h2>
         <p class="sub">
-          For now, please use the enquiry form above. Additional contact
-          details can be added when an appropriate contact method is ready.
+          Start a conversation with Tech Fixer 11 using the repair chat.
         </p>
+      </div>
+
+      <div class="contact-box">
+        <h3>Let's talk about your laptop.</h3>
+        <p class="sub">
+          Explain the problem and provide your laptop's make and model.
+          We'll review the information and discuss the next steps.
+        </p>
+
+        <div class="actions">
+          <a class="btn" href="chat.html">OPEN REPAIR CHAT ↗</a>
+        </div>
       </div>
     </section>
 
@@ -728,53 +495,6 @@
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Send the enquiry through Formspree, then open the chat preview.
-  // Live chat still needs a secure backend.
-  const repairForm = document.getElementById("repairForm");
-  const formFeedback = document.getElementById("formFeedback");
-  const submitEnquiry = document.getElementById("submitEnquiry");
-
-  repairForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (!repairForm.reportValidity()) return;
-
-    submitEnquiry.disabled = true;
-    submitEnquiry.textContent = "SENDING...";
-    formFeedback.textContent = "Sending your enquiry...";
-
-    try {
-      const response = await fetch(repairForm.action, {
-        method: "POST",
-        body: new FormData(repairForm),
-        headers: { "Accept": "application/json" }
-      });
-
-      if (!response.ok) {
-        let message = "We couldn't send your enquiry. Please try again.";
-
-        try {
-          const result = await response.json();
-
-          if (result.errors && result.errors.length) {
-            message = result.errors.map(error => error.message).join(" ");
-          }
-        } catch (_) {}
-
-        throw new Error(message);
-      }
-
-      window.location.href = "chat.html?submitted=1";
-
-    } catch (error) {
-      formFeedback.textContent =
-        error.message || "Something went wrong. Please try again.";
-
-      submitEnquiry.disabled = false;
-      submitEnquiry.textContent = "SEND ENQUIRY ↗";
-    }
-  });
 </script>
 
 </body>
