@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07070b">
+  <title>Repair Chat | Tech Fixer 11</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07070b;
+      --panel: #11111a;
+      --panel2: #171722;
+      --cyan: #69f7ff;
+      --pink: #ff2c9c;
+      --muted: #b7b7c8;
+      --line: rgba(105,247,255,.2);
+      --white: #f7f7ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--white);
+      background:
+        radial-gradient(ellipse at 75% 12%, rgba(255,44,156,.12), transparent 34%),
+        radial-gradient(ellipse at 10% 40%, rgba(37,175,255,.09), transparent 34%),
+        var(--bg);
+      font: 16px/1.6 system-ui, sans-serif;
+    }
+
+    .wrap {
+      width: min(900px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(7,7,11,.92);
+    }
+
+    .top {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--cyan); }
+    a { color: var(--cyan); }
+
+    main { padding: 48px 0; }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: .78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+
+    .muted { color: var(--muted); }
+
+    .panel {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: linear-gradient(150deg,var(--panel2),var(--panel));
+      box-shadow: 0 0 35px rgba(105,247,255,.05);
+    }
+
+    .statusrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--cyan);
+      font-size: .9rem;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    .cancel {
+      border: 1px solid rgba(255,255,255,.25);
+      background: transparent;
+      color: var(--muted);
+      border-radius: 7px;
+      padding: 7px 11px;
+      font: inherit;
+      font-size: .82rem;
+      cursor: pointer;
+    }
+
+    .cancel:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+
+    .messages {
+      display: grid;
+      gap: 14px;
+      padding: 22px 0;
+      min-height: 220px;
+    }
+
+    .bubble {
+      max-width: 80%;
+      padding: 13px 16px;
+      border-radius: 13px;
+      background: #20202c;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .bubble small {
+      display: block;
+      color: var(--muted);
+      font-size: .75rem;
+      margin-bottom: 4px;
+    }
+
+    .bubble.customer {
+      justify-self: end;
+      border-color: rgba(255,44,156,.35);
+      background: rgba(255,44,156,.08);
+    }
+
+    .bubble.fix {
+      justify-self: start;
+      border-color: rgba(105,247,255,.25);
+    }
+
+    .composer {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    .composer textarea {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid #343448;
+      border-radius: 9px;
+      background: #090911;
+      color: var(--white);
+      font: inherit;
+    }
+
+    .composer button {
+      margin-top: 10px;
+      padding: 11px 18px;
+      border: 1px solid var(--pink);
+      border-radius: 8px;
+      background: rgba(255,44,156,.13);
+      color: var(--white);
+      font: inherit;
+      font-weight: 700;
+      cursor: not-allowed;
+      opacity: .6;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 13px;
+      border: 1px solid rgba(255,44,156,.3);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: .86rem;
+      background: rgba(255,44,156,.045);
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,.75);
+      z-index: 10;
+    }
+
+    .overlay.open { display: grid; }
+
+    .dialog {
+      width: min(420px,100%);
+      padding: 24px;
+      border: 1px solid var(--pink);
+      border-radius: 14px;
+      background: #11111a;
+      box-shadow: 0 0 35px rgba(255,44,156,.15);
+    }
+
+    .dialog h2 { margin: 0 0 8px; }
+    .dialog p { color: var(--muted); }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .dialog-actions button {
+      padding: 9px 13px;
+      border-radius: 7px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .keep {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--white);
+    }
+
+    .confirm {
+      background: rgba(255,44,156,.15);
+      border: 1px solid var(--pink);
+      color: var(--white);
+    }
+
+    .cancelled {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid var(--pink);
+      border-radius: 10px;
+      color: var(--white);
+      background: rgba(255,44,156,.08);
+    }
+
+    .cancelled.show { display: block; }
+
+    @media(max-width:560px) {
+      .panel { padding: 17px; }
+      .bubble { max-width: 94%; }
+      .top { align-items: flex-start; padding: 14px 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap top">
+    <a class="brand" href="index.html">
+      TECH FIXER <span>11</span>
+    </a>
+
+    <a href="index.html#request">← Back to website</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="eyebrow">Customer support</div>
+  <h1>Repair Chat</h1>
+
+  <p class="muted">
+    Keep your repair questions and updates together in one place.
+  </p>
+
+  <div class="notice" id="submittedNotice" style="display:none" role="status">
+    <strong>Your enquiry has been sent.</strong>
+    This page is currently a chat preview. The fixer has received
+    the enquiry by email, but live replies are not connected yet.
+  </div>
+
+  <section class="panel" aria-label="Repair conversation preview">
+
+    <div class="statusrow">
+      <div>
+        <strong>Repair enquiry</strong>
+
+        <div class="status">
+          <span class="dot" id="statusDot"></span>
+          <span id="statusText">Enquiry received · awaiting fixer</span>
+        </div>
+      </div>
+
+      <button class="cancel" id="cancelBtn" type="button">
+        Cancel enquiry
+      </button>
+    </div>
+
+    <div class="messages" aria-live="polite">
+
+      <div class="bubble fix">
+        <small>Tech Fixer 11 · Example message</small>
+        Thanks for your enquiry. We'll review the details
+        and get back to you with the next steps.
+      </div>
+
+      <div class="bubble customer">
+        <small>You · Example message</small>
+        Thank you. I'll wait for your update.
+      </div>
+
+    </div>
+
+    <div class="composer">
+      <label for="message">Your message</label>
+
+      <textarea id="message"
+        placeholder="Messaging will be enabled when the secure chat service is connected."
+        disabled></textarea>
+
+      <button type="button" disabled>Send message</button>
+    </div>
+
+    <div class="notice">
+      Chat preview only: messages are examples. A secure live chat
+      and fixer dashboard still need to be connected before customers
+      can use this page.
+    </div>
+
+    <div class="cancelled" id="cancelledNotice" role="status">
+      <strong>Enquiry marked as cancelled in this preview.</strong>
+      <br>
+      This demonstration does not send a cancellation to the fixer.
+      The live version will notify the fixer and update the repair record.
+    </div>
+
+  </section>
+</main>
+
+<div class="overlay" id="confirmOverlay"
+     role="dialog" aria-modal="true"
+     aria-labelledby="confirmTitle"
+     aria-describedby="confirmText">
+
+  <div class="dialog">
+    <h2 id="confirmTitle">Cancel this enquiry?</h2>
+
+    <p id="confirmText">
+      Are you sure? If you no longer need the repair, you can cancel
+      this preview. This cannot be undone in the live system without
+      contacting the fixer.
+    </p>
+
+    <div class="dialog-actions">
+      <button class="keep" id="keepBtn" type="button">
+        Keep inquiry
+      </button>
+
+      <button class="confirm" id="confirmBtn" type="button">
+        Yes, cancel
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const submittedNotice = document.getElementById("submittedNotice");
+
+  if (new URLSearchParams(window.location.search).get("submitted") === "1") {
+    submittedNotice.style.display = "block";
+  }
+
+  const cancelBtn = document.getElementById("cancelBtn");
+  const overlay = document.getElementById("confirmOverlay");
+  const keepBtn = document.getElementById("keepBtn");
+  const confirmBtn = document.getElementById("confirmBtn");
+  const statusText = document.getElementById("statusText");
+  const statusDot = document.getElementById("statusDot");
+  const cancelledNotice = document.getElementById("cancelledNotice");
+
+  function closeDialog() {
+    overlay.classList.remove("open");
+    cancelBtn.focus();
+  }
+
+  cancelBtn.addEventListener("click", () => {
+    overlay.classList.add("open");
+    keepBtn.focus();
+  });
+
+  keepBtn.addEventListener("click", closeDialog);
+
+  overlay.addEventListener("click", (event) => {
+    if (event.target === overlay) {
+      closeDialog();
+    }
+  });
+
+  confirmBtn.addEventListener("click", () => {
+    statusText.textContent = "Cancelled · preview only";
+
+    statusDot.style.background = "var(--pink)";
+    statusDot.style.boxShadow = "0 0 10px var(--pink)";
+
+    cancelBtn.disabled = true;
+    cancelBtn.textContent = "Cancelled";
+
+    cancelledNotice.classList.add("show");
+
+    closeDialog();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && overlay.classList.contains("open")) {
+      closeDialog();
+    }
+  });
+</script>
+
+</body>
+</html>
